@@ -26,7 +26,7 @@ namespace KindHands.DAL.Models
         {
             Name = "";
             Description = "";
-            User = null;
+            User = new User();
         }
 
         public Organisation(string name, string description, User user)

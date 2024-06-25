@@ -9,10 +9,12 @@ namespace KindHands.BLL.Interfaces
 {
     public interface IVolunteerService
     {
-        bool CheckVolunteer(string firstName);
+        bool CheckVolunteer(string phoneNumber);
 
         void AddVolunteer(string username, string password, string phoneNumber, string email, string firstName, string lastName);
 
         Volunteer ConvertToVolunteer(string username, string password, string phoneNumber, string email, string firstName, string lastName);
+
+        bool AuthenticateVolunteer(string email, string password, string phoneNumber);
     }
 }

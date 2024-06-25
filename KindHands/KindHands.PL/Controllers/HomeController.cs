@@ -37,25 +37,58 @@ namespace KindHands.PL.Controllers
             return View();
         }
 
-        /*
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        public IActionResult Login()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View();
         }
-        */
+
+        [HttpPost]
+        public IActionResult LoginVolunteer(string email, string password, string phoneNumber)
+        {
+            if (!_volunteerService.CheckVolunteer(phoneNumber))
+            {
+                TempData["ErrorMessage"] = "Account not found.";
+                return RedirectToAction("Login");
+            }
+
+            if (!_volunteerService.AuthenticateVolunteer(email, password, phoneNumber))
+            {
+                TempData["ErrorMessage"] = "Incorrect credentials.";
+                return RedirectToAction("Login");
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public IActionResult LoginOrganisation(string email, string password, string phoneNumber)
+        {
+            if (!_organisationService.CheckOrganisation(phoneNumber))
+            {
+                TempData["ErrorMessage"] = "Account not found.";
+                return RedirectToAction("Login");
+            }
+
+            if (!_organisationService.AuthenticateOrganisation(email, password, phoneNumber))
+            {
+                TempData["ErrorMessage"] = "Incorrect credentials.";
+                return RedirectToAction("Login");
+            }
+
+            return RedirectToAction("Index");
+        }
 
         [HttpPost]
         public IActionResult RegisterVolunteer(string username, string password, string phoneNumber, string email, string firstName, string lastName)
         {
-            if (!_volunteerService.CheckVolunteer(firstName))
+            if (!_volunteerService.CheckVolunteer(phoneNumber))
             {
                 _volunteerService.AddVolunteer(username, password, phoneNumber, email, firstName, lastName);
                 TempData["SuccessMessage"] = "Account registered successfully. You can now log in.";
                 return RedirectToAction("Register");
             }
 
-            TempData["ErrorMessage"] = "Account with this plate number already exists.";
+            TempData["ErrorMessage"] = "Account with this phone number already exists.";
             return RedirectToAction("Register");
         }
 
@@ -63,7 +96,7 @@ namespace KindHands.PL.Controllers
         [HttpPost]
         public IActionResult RegisterOrganisation(string username, string password, string phoneNumber, string email, string name, string description)
         {
-            if (!_organisationService.CheckOrganisation(name))
+            if (!_organisationService.CheckOrganisation(phoneNumber))
             {
                 _organisationService.AddOrganisation(username, password, phoneNumber, email, name, description);
                 TempData["SuccessMessage"] = "Account registered successfully. You can now log in.";

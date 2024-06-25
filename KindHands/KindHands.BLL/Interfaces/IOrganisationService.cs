@@ -9,10 +9,12 @@ namespace KindHands.BLL.Interfaces
 {
     public interface IOrganisationService
     {
-        bool CheckOrganisation(string name);
+        bool CheckOrganisation(string phoneNumber);
 
         void AddOrganisation(string username, string password, string phoneNumber, string email, string name, string description);
 
         Organisation ConvertToOrganisation(string username, string password, string phoneNumber, string email, string name, string description);
+
+        bool AuthenticateOrganisation(string email, string password, string phoneNumber);
     }
 }

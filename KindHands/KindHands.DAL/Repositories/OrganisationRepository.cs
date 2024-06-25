@@ -23,5 +23,12 @@ namespace KindHands.DAL.Repositories
             _context.Organisations.Add(newOrganisation);
             _context.SaveChanges();
         }
+
+        public List<Organisation> GetAllOrganisationsWithUsers()
+        {
+            return _context.Organisations
+                .Include(o => o.User)
+                .ToList();
+        }
     }
 }

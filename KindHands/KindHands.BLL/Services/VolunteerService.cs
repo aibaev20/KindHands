@@ -13,9 +13,9 @@ namespace KindHands.BLL.Services
             _repository = repository;
         }
 
-        public bool CheckVolunteer(string firstName)
+        public bool CheckVolunteer(string phoneNumber)
         {
-            return _repository.GetAllVolunteers()?.Any(volunteer => volunteer.FirstName == firstName) ?? false;
+            return _repository.GetAllVolunteersWithUsers()?.Any(volunteer => volunteer.User.PhoneNumber == phoneNumber) ?? false;
         }
 
         public Volunteer ConvertToVolunteer(string username, string password, string phoneNumber, string email, string firstName, string lastName)
@@ -29,6 +29,12 @@ namespace KindHands.BLL.Services
         public void AddVolunteer(string username, string password, string phoneNumber, string email, string firstName, string lastName)
         {
             _repository.AddVolunteer(ConvertToVolunteer(username, password, phoneNumber, email, firstName, lastName));
+        }
+
+        public bool AuthenticateVolunteer(string email, string password, string phoneNumber)
+        {
+            return _repository.GetAllVolunteersWithUsers()
+                .Any(volunteer => volunteer.User.Email == email && volunteer.User.Password == password && volunteer.User.PhoneNumber == phoneNumber);
         }
     }
 }

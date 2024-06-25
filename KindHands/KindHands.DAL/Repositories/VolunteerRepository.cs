@@ -1,5 +1,6 @@
 ﻿using KindHands.DAL.Data;
 using KindHands.DAL.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace KindHands.DAL.Repositories
 {
@@ -21,6 +22,13 @@ namespace KindHands.DAL.Repositories
         {
             _context.Volunteers.Add(newVolunteer);
             _context.SaveChanges();
+        }
+
+        public List<Volunteer> GetAllVolunteersWithUsers()
+        {
+            return _context.Volunteers
+                .Include(v => v.User)
+                .ToList();
         }
     }
 }

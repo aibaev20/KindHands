@@ -18,9 +18,9 @@ namespace KindHands.BLL.Services
             _repository = repository;
         }
 
-        public bool CheckOrganisation(string name)
+        public bool CheckOrganisation(string phoneNumber)
         {
-            return _repository.GetAllOrganisations()?.Any(organisation => organisation.Name == name) ?? false;
+            return _repository.GetAllOrganisationsWithUsers()?.Any(organisation => organisation.User.PhoneNumber == phoneNumber) ?? false;
         }
 
         public Organisation ConvertToOrganisation(string username, string password, string phoneNumber, string email, string name, string description)
@@ -34,6 +34,12 @@ namespace KindHands.BLL.Services
         public void AddOrganisation(string username, string password, string phoneNumber, string email, string name, string description)
         {
             _repository.AddOrganisation(ConvertToOrganisation(username, password, phoneNumber, email, name, description));
+        }
+
+        public bool AuthenticateOrganisation(string email, string password, string phoneNumber)
+        {
+            return _repository.GetAllOrganisationsWithUsers()
+                .Any(organisation => organisation.User.Email == email && organisation.User.Password == password && organisation.User.PhoneNumber == phoneNumber);
         }
     }
 }
