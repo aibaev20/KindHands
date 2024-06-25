@@ -1,4 +1,7 @@
+using KindHands.BLL.Interfaces;
+using KindHands.BLL.Services;
 using KindHands.DAL.Data;
+using KindHands.DAL.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
@@ -13,8 +16,11 @@ namespace KindHands.PL
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
-            
+            builder.Services.AddScoped<IOrganisationService, OrganisationService>();
+            builder.Services.AddScoped<IVolunteerService, VolunteerService>();
 
+            builder.Services.AddScoped<OrganisationRepository>();
+            builder.Services.AddScoped<VolunteerRepository>();
 
             builder.Services.AddDbContext<KindHandsDbContext>(options =>
             {

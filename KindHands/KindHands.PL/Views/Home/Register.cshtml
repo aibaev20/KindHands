@@ -1,0 +1,134 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@model KindHands.DAL.Models.User
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="~/css/login-register.css">
+
+</head>
+
+<body>
+
+    <div class="container mt-4">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <h2 class="text-center">Welcome to KindHands!</h2>
+
+                <h3 class="text-center pt-5 mb-5">Register</h3>
+
+                @if (TempData["ErrorMessage"] != null)
+                {
+                    <div class="alert alert-danger" role="alert">
+                        @TempData["ErrorMessage"]
+                    </div>
+                }
+
+                @if (TempData["SuccessMessage"] != null)
+                {
+                    <div class="alert alert-success" role="alert">
+                        @TempData["SuccessMessage"]
+                    </div>
+                }
+
+                <div class="mb-3 text-center">
+                    <button type="button" class="btn registration-option" onclick="FormManager.selectOption('volunteer')">
+                        Volunteer
+                    </button>
+                    <button type="button" class="btn registration-option selected" onclick="FormManager.selectOption('organisation')">
+                        Organisation
+                    </button>
+                </div>
+
+                <!-- Volunteer Form -->
+                <form asp-action="RegisterVolunteer" method="post" id="volunteer-form" class="hidden">
+
+                    <div class="volunteer-field">
+                        <label for="volunteer-username">Username:</label>
+                        <input type="text" class="form-control" id="volunteer-username" name="username" autocomplete="on" required />
+                    </div>
+
+                    <div class="volunteer-field">
+                        <label for="volunteer-password">Password:</label>
+                        <input type="text" class="form-control" id="volunteer-password" name="password" required />
+                    </div>
+
+                    <div class="volunteer-field">
+                        <label for="volunteer-phone-number">Phone number:</label>
+                        <input type="text" class="form-control" id="volunteer-phone-number" name="phoneNumber" autocomplete="on" required />
+                    </div>
+
+                    <div class="volunteer-field">
+                        <label for="volunteer-email">Email:</label>
+                        <input type="email" class="form-control" id="volunteer-email" name="email" autocomplete="on" required />
+                    </div>
+
+                    <div class="volunteer-field">
+                        <label for="volunteer-first-name">First Name</label>
+                        <input type="text" class="form-control" id="volunteer-first-name" name="firstName" autocomplete="on" required />
+                    </div>
+
+                    <div class="volunteer-field">
+                        <label for="volunteer-last-name">Last Name</label>
+                        <input type="text" class="form-control" id="volunteer-last-name" name="lastName" autocomplete="on" required />
+                    </div>
+
+                    <div class="text-center pt-1 mt-4">
+                        <button type="submit" class="btn btn-primary" onsubmit="FormManager.clearFormInputs()" style="background: #FCC100; border-color: #FFC100">Register</button>
+                    </div>
+                    <p class="text-center mt-5">Already have an account? <a asp-controller="Home" asp-action="Login" style="color: #FCC100;">Log In</a></p>
+
+                </form>
+
+                <!-- Organisation Form -->
+                <form asp-action="RegisterOrganisation" method="post" id="organisation-form">
+
+                    <div class="organisation-field">
+                        <label for="organisation-username">Username:</label>
+                        <input type="text" class="form-control" id="organisation-username" name="username" autocomplete="on" required />
+                    </div>
+
+                    <div class="organisation-field">
+                        <label for="organisation-password">Password:</label>
+                        <input type="text" class="form-control" id="organisation-password" name="password" required />
+                    </div>
+
+                    <div class="organisation-field">
+                        <label for="organisation-phone-number">Phone number:</label>
+                        <input type="text" class="form-control" id="organisation-phone-number" name="phoneNumber" autocomplete="on" required />
+                    </div>
+
+                    <div class="organisation-field">
+                        <label for="organisation-email">Email:</label>
+                        <input type="email" class="form-control" id="organisation-email" name="email" autocomplete="on" required />
+                    </div>
+
+                    <div class="organisation-field">
+                        <label for="organisation-name">Name:</label>
+                        <input type="text" class="form-control" id="organisation-name" name="name" autocomplete="on" required />
+                    </div>
+
+                    <div class="organisation-field">
+                        <label for="organisation-description">Description:</label>
+                        <input type="text" class="form-control" id="organisation-description" name="description" autocomplete="on" required />
+                    </div>
+
+                    <div class="text-center pt-1 mt-4">
+                        <button type="submit" class="btn btn-primary" onsubmit="FormManager.clearFormInputs()" style="background: #FCC100; border-color: #FFC100">Register</button>
+                    </div>
+                    
+                    <div class="text-center">
+                        <p class="text-center mt-5">Already have an account? <a asp-controller="Home" asp-action="Login" style="color: #FCC100;">Log In</a></p>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="~/js/form.js"></script>
+</body>

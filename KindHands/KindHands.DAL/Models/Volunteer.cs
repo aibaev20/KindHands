@@ -28,5 +28,12 @@ namespace KindHands.DAL.Models
             LastName = "";
             User = null;
         }
+
+        public Volunteer(string firstName, string lastName, User user)
+        {
+            FirstName = firstName;
+            LastName = lastName;
+            User = user;
+        }
     }
 }
