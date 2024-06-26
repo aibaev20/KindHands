@@ -20,8 +20,20 @@ namespace KindHands.BLL.Services
 
         public Volunteer ConvertToVolunteer(string username, string password, string phoneNumber, string email, string firstName, string lastName)
         {
-            User user = new User(username, password, phoneNumber, email);
-            Volunteer volunteer = new Volunteer(firstName, lastName, user);
+            User user = new User()
+            {
+                Email = email,
+                Username = username,
+                Password = password,
+                PhoneNumber = phoneNumber,
+            };
+
+            Volunteer volunteer = new Volunteer()
+            {
+                FirstName = firstName,
+                LastName = lastName,
+                User = user
+            };
 
             return volunteer;
         }

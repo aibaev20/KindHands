@@ -1,39 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace KindHands.DAL.Models
+namespace KindHands.DAL.Models;
+
+public partial class Organisation
 {
-    public class Organisation
-    {
-        [Key]
-        public int OrganisationId { get; set; }
+    public int OrganisationId { get; set; }
 
-        [Required]
-        public string Name { get; set; }
+    public string Name { get; set; } = null!;
 
-        [Required]
-        public string Description { get; set; }
+    public string Description { get; set; } = null!;
 
-        [ForeignKey("UserId")]
-        public User? User { get; set; }
+    public int? UserId { get; set; }
 
-        public Organisation()
-        {
-            Name = "";
-            Description = "";
-            User = new User();
-        }
+    public virtual ICollection<Ad> Ads { get; set; } = new List<Ad>();
 
-        public Organisation(string name, string description, User user)
-        {
-            Name = name;
-            Description = description;
-            User = user;
-        }
-    }
+    public virtual User? User { get; set; }
 }

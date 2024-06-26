@@ -1,28 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace KindHands.DAL.Models
+namespace KindHands.DAL.Models;
+
+public partial class VolunteerAd
 {
-    public class VolunteerAd
-    {
-        [Key]
-        public int VolunteerAdId { get; set; }
+    public int VolunteerAdId { get; set; }
 
-        [ForeignKey("AdId")]
-        public Ad? Ad { get; set; }
+    public int? AdId { get; set; }
 
-        [ForeignKey("VolunteerId")]
-        public Volunteer? Volunteer { get; set; }
+    public int? VolunteerId { get; set; }
 
-        public VolunteerAd()
-        {
-            Ad = null;
-            Volunteer = null;
-        }
-    }
+    public virtual Ad? Ad { get; set; }
+
+    public virtual Volunteer? Volunteer { get; set; }
 }

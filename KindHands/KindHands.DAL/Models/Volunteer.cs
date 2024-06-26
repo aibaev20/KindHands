@@ -1,39 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace KindHands.DAL.Models
+namespace KindHands.DAL.Models;
+
+public partial class Volunteer
 {
-    public class Volunteer
-    {
-        [Key]
-        public int VolunteerId { get; set; }
+    public int VolunteerId { get; set; }
 
-        [Required]
-        public string FirstName { get; set; }
+    public string FirstName { get; set; } = null!;
 
-        [Required]
-        public string LastName { get; set; }
+    public string LastName { get; set; } = null!;
 
-        [ForeignKey("UserId")]
-        public User? User { get; set; }
+    public int? UserId { get; set; }
 
-        public Volunteer()
-        {
-            FirstName = "";
-            LastName = "";
-            User = new User();
-        }
+    public virtual User? User { get; set; }
 
-        public Volunteer(string firstName, string lastName, User user)
-        {
-            FirstName = firstName;
-            LastName = lastName;
-            User = user;
-        }
-    }
+    public virtual ICollection<VolunteerAd> VolunteerAds { get; set; } = new List<VolunteerAd>();
 }

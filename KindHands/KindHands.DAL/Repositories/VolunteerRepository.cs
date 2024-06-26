@@ -6,9 +6,9 @@ namespace KindHands.DAL.Repositories
 {
     public class VolunteerRepository
     {
-        private readonly KindHandsDbContext _context;
+        private readonly KindHandsContext _context;
 
-        public VolunteerRepository(KindHandsDbContext context)
+        public VolunteerRepository(KindHandsContext context)
         {
             _context = context;
         }

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace KindHands.DAL.Migrations
 {
     /// <inheritdoc />
-    public partial class initialsetup : Migration
+    public partial class Scaffolddatabase : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

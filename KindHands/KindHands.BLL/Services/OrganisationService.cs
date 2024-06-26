@@ -25,8 +25,20 @@ namespace KindHands.BLL.Services
 
         public Organisation ConvertToOrganisation(string username, string password, string phoneNumber, string email, string name, string description)
         {
-            User user = new User(username, password, phoneNumber, email);
-            Organisation organisation = new Organisation(name, description, user);
+            User user = new User()
+            {
+                Email = email,
+                Username = username,
+                Password = password,
+                PhoneNumber = phoneNumber,
+            };
+
+            Organisation organisation = new Organisation()
+            {
+                Name = name,
+                Description= description,
+                User = user,
+            };
 
             return organisation;
         }

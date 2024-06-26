@@ -6,9 +6,9 @@ namespace KindHands.DAL.Repositories
 {
     public class OrganisationRepository
     {
-        private readonly KindHandsDbContext _context;
+        private readonly KindHandsContext _context;
 
-        public OrganisationRepository(KindHandsDbContext context)
+        public OrganisationRepository(KindHandsContext context)
         {
             _context = context;
         }

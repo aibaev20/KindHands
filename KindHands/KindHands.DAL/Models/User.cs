@@ -1,45 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace KindHands.DAL.Models
+namespace KindHands.DAL.Models;
+
+public partial class User
 {
-    public class User
-    {
-        [Key]
-        public int UserId { get; set; }
+    public int UserId { get; set; }
 
-        [Required]
-        public string Username { get; set; }
+    public string Username { get; set; } = null!;
 
-        [Required]
-        public string Password { get; set; }
+    public string Password { get; set; } = null!;
 
-        [Required]
-        [MaxLength(15)]
-        public string PhoneNumber { get; set; }
+    public string PhoneNumber { get; set; } = null!;
 
-        [Required]
-        [EmailAddress]
-        public string Email { get; set; }
+    public string Email { get; set; } = null!;
 
-        public User()
-        {
-            Username = "";
-            Password = "";
-            PhoneNumber = "";
-            Email = "";
-        }
+    public virtual ICollection<Organisation> Organisations { get; set; } = new List<Organisation>();
 
-        public User(string username, string password, string phoneNumber, string email)
-        {
-            Username = username;
-            Password = password;
-            PhoneNumber = phoneNumber;
-            Email = email;
-        }
-    }
+    public virtual ICollection<Volunteer> Volunteers { get; set; } = new List<Volunteer>();
 }

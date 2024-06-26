@@ -4,19 +4,16 @@ using KindHands.DAL.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
 namespace KindHands.DAL.Migrations
 {
-    [DbContext(typeof(KindHandsDbContext))]
-    [Migration("20240623122140_initialsetup")]
-    partial class initialsetup
+    [DbContext(typeof(KindHandsContext))]
+    partial class KindHandsContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -59,7 +56,7 @@ namespace KindHands.DAL.Migrations
 
                     b.HasKey("AdId");
 
-                    b.HasIndex("OrganisationId");
+                    b.HasIndex(new[] { "OrganisationId" }, "IX_Ads_OrganisationId");
 
                     b.ToTable("Ads");
                 });
@@ -85,7 +82,7 @@ namespace KindHands.DAL.Migrations
 
                     b.HasKey("OrganisationId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex(new[] { "UserId" }, "IX_Organisations_UserId");
 
                     b.ToTable("Organisations");
                 });
@@ -141,7 +138,7 @@ namespace KindHands.DAL.Migrations
 
                     b.HasKey("VolunteerId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex(new[] { "UserId" }, "IX_Volunteers_UserId");
 
                     b.ToTable("Volunteers");
                 });
@@ -162,9 +159,9 @@ namespace KindHands.DAL.Migrations
 
                     b.HasKey("VolunteerAdId");
 
-                    b.HasIndex("AdId");
+                    b.HasIndex(new[] { "AdId" }, "IX_VolunteerAds_AdId");
 
-                    b.HasIndex("VolunteerId");
+                    b.HasIndex(new[] { "VolunteerId" }, "IX_VolunteerAds_VolunteerId");
 
                     b.ToTable("VolunteerAds");
                 });
@@ -172,7 +169,7 @@ namespace KindHands.DAL.Migrations
             modelBuilder.Entity("KindHands.DAL.Models.Ad", b =>
                 {
                     b.HasOne("KindHands.DAL.Models.Organisation", "Organisation")
-                        .WithMany()
+                        .WithMany("Ads")
                         .HasForeignKey("OrganisationId");
 
                     b.Navigation("Organisation");
@@ -181,7 +178,7 @@ namespace KindHands.DAL.Migrations
             modelBuilder.Entity("KindHands.DAL.Models.Organisation", b =>
                 {
                     b.HasOne("KindHands.DAL.Models.User", "User")
-                        .WithMany()
+                        .WithMany("Organisations")
                         .HasForeignKey("UserId");
 
                     b.Navigation("User");
@@ -190,7 +187,7 @@ namespace KindHands.DAL.Migrations
             modelBuilder.Entity("KindHands.DAL.Models.Volunteer", b =>
                 {
                     b.HasOne("KindHands.DAL.Models.User", "User")
-                        .WithMany()
+                        .WithMany("Volunteers")
                         .HasForeignKey("UserId");
 
                     b.Navigation("User");
@@ -199,16 +196,38 @@ namespace KindHands.DAL.Migrations
             modelBuilder.Entity("KindHands.DAL.Models.VolunteerAd", b =>
                 {
                     b.HasOne("KindHands.DAL.Models.Ad", "Ad")
-                        .WithMany()
+                        .WithMany("VolunteerAds")
                         .HasForeignKey("AdId");
 
                     b.HasOne("KindHands.DAL.Models.Volunteer", "Volunteer")
-                        .WithMany()
+                        .WithMany("VolunteerAds")
                         .HasForeignKey("VolunteerId");
 
                     b.Navigation("Ad");
 
                     b.Navigation("Volunteer");
+                });
+
+            modelBuilder.Entity("KindHands.DAL.Models.Ad", b =>
+                {
+                    b.Navigation("VolunteerAds");
+                });
+
+            modelBuilder.Entity("KindHands.DAL.Models.Organisation", b =>
+                {
+                    b.Navigation("Ads");
+                });
+
+            modelBuilder.Entity("KindHands.DAL.Models.User", b =>
+                {
+                    b.Navigation("Organisations");
+
+                    b.Navigation("Volunteers");
+                });
+
+            modelBuilder.Entity("KindHands.DAL.Models.Volunteer", b =>
+                {
+                    b.Navigation("VolunteerAds");
                 });
 #pragma warning restore 612, 618
         }

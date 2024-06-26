@@ -1,48 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace KindHands.DAL.Models
+namespace KindHands.DAL.Models;
+
+public partial class Ad
 {
-    public class Ad
-    {
-        [Key]
-        public int AdId { get; set; }
+    public int AdId { get; set; }
 
-        [Required]
-        public string Title { get; set; }
+    public string Title { get; set; } = null!;
 
-        [Required]
-        public string Information { get; set; }
+    public string Information { get; set; } = null!;
 
-        [Required]
-        public DateTime CreatedAt { get; set; }
+    public DateTime CreatedAt { get; set; }
 
-        [Required]
-        public DateTime StartDate { get; set; }
+    public DateTime StartDate { get; set; }
 
-        [Required]
-        public DateTime EndDate { get; set; }
+    public DateTime EndDate { get; set; }
 
-        [Required]
-        public string Location { get; set; }
+    public string Location { get; set; } = null!;
 
-        [ForeignKey("OrganisationId")]
-        public Organisation? Organisation { get; set; }
+    public int? OrganisationId { get; set; }
 
-        public Ad()
-        {
-            Title = "";
-            Information = "";
-            CreatedAt = DateTime.Now;
-            StartDate = DateTime.Now;
-            EndDate = DateTime.Now;
-            Location = "";
-            Organisation = null;
-        }
-    }
+    public virtual Organisation? Organisation { get; set; }
+
+    public virtual ICollection<VolunteerAd> VolunteerAds { get; set; } = new List<VolunteerAd>();
 }
