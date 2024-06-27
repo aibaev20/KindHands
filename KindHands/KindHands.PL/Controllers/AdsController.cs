@@ -13,6 +13,7 @@ namespace KindHands.PL.Controllers
     public class AdsController : Controller
     {
         private readonly KindHandsContext _context;
+        public static bool IsLoggedIn = false;
 
         public AdsController(KindHandsContext context)
         {
@@ -22,6 +23,7 @@ namespace KindHands.PL.Controllers
         // GET: Ads
         public async Task<IActionResult> Index()
         {
+            ViewBag.IsLoggedIn = IsLoggedIn;
             var kindHandsContext = _context.Ads.Include(a => a.Organisation);
             return View(await kindHandsContext.ToListAsync());
         }
@@ -48,7 +50,7 @@ namespace KindHands.PL.Controllers
         // GET: Ads/Create
         public IActionResult Create()
         {
-            ViewData["OrganisationId"] = new SelectList(_context.Organisations, "OrganisationId", "Description");
+            ViewData["OrganisationId"] = new SelectList(_context.Organisations, "OrganisationId", "Name");
             return View();
         }
 
@@ -65,7 +67,7 @@ namespace KindHands.PL.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["OrganisationId"] = new SelectList(_context.Organisations, "OrganisationId", "Description", ad.OrganisationId);
+            ViewData["OrganisationId"] = new SelectList(_context.Organisations, "OrganisationId", "Name", ad.OrganisationId);
             return View(ad);
         }
 
@@ -82,7 +84,7 @@ namespace KindHands.PL.Controllers
             {
                 return NotFound();
             }
-            ViewData["OrganisationId"] = new SelectList(_context.Organisations, "OrganisationId", "Description", ad.OrganisationId);
+            ViewData["OrganisationId"] = new SelectList(_context.Organisations, "OrganisationId", "Name", ad.OrganisationId);
             return View(ad);
         }
 
@@ -118,7 +120,7 @@ namespace KindHands.PL.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["OrganisationId"] = new SelectList(_context.Organisations, "OrganisationId", "Description", ad.OrganisationId);
+            ViewData["OrganisationId"] = new SelectList(_context.Organisations, "OrganisationId", "Name", ad.OrganisationId);
             return View(ad);
         }
 

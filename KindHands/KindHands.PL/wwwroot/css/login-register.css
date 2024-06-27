@@ -1,0 +1,21 @@
+﻿.registration-option {
+    cursor: pointer;
+}
+
+.registration-option:hover {
+    background-color: #efefef;
+}
+
+.selected {
+    background-color: #FFC100;
+    color: #fff;
+}
+
+.selected:hover {
+    background-color: #FFC100;
+    color: #fff;
+}
+
+.hidden {
+    display: none;
+}

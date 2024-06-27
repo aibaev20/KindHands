@@ -8,6 +8,7 @@ namespace KindHands.PL.Controllers
     {
         private readonly IVolunteerService _volunteerService;
         private readonly IOrganisationService _organisationService;
+        public static bool IsLoggedIn = false;
 
         //private readonly ILogger<HomeController> _logger;
 
@@ -24,6 +25,7 @@ namespace KindHands.PL.Controllers
 
         public IActionResult Index()
         {
+            ViewBag.IsLoggedIn = IsLoggedIn;
             return View();
         }
 
@@ -34,11 +36,13 @@ namespace KindHands.PL.Controllers
 
         public IActionResult Register()
         {
+            ViewBag.IsLoggedIn = IsLoggedIn;
             return View();
         }
 
         public IActionResult Login()
         {
+            ViewBag.IsLoggedIn = IsLoggedIn;
             return View();
         }
 
@@ -56,7 +60,8 @@ namespace KindHands.PL.Controllers
                 TempData["ErrorMessage"] = "Incorrect credentials.";
                 return RedirectToAction("Login");
             }
-
+            IsLoggedIn = true;
+            ViewBag.IsLoggedIn = IsLoggedIn;
             return RedirectToAction("Index");
         }
 
@@ -74,7 +79,8 @@ namespace KindHands.PL.Controllers
                 TempData["ErrorMessage"] = "Incorrect credentials.";
                 return RedirectToAction("Login");
             }
-
+            IsLoggedIn = true;
+            ViewBag.IsLoggedIn = IsLoggedIn;
             return RedirectToAction("Index");
         }
 
