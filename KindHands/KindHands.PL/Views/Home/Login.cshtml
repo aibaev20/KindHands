@@ -1,6 +1,6 @@
 ﻿@model KindHands.DAL.Models.User
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Login Page";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -49,11 +49,11 @@
                     </div>
 
                     <div class="volunteer-field text-center pt-1 mt-4">
-                        <button style="background: #FCC100; border-color: #FFC100" type="submit" class="btn btn-primary" onsubmit="FormManager.clearFormInputs()">Login</button>
+                        <button type="submit" class="btn btn-primary" onsubmit="FormManager.clearFormInputs()">Login</button>
                     </div>
 
                     <p class="text-center mt-5">
-                        Don't have an account? <a asp-controller="Home" asp-action="Register" style="color: #FCC100">Register now</a>
+                        Don't have an account? <a asp-controller="Home" asp-action="Register" class="text-primary">Register now</a>
                     </p>
 
                 </form>
@@ -75,12 +75,12 @@
                     </div>
 
                     <div class="volunteer-field text-center pt-1 mt-4">
-                        <button style="background: #FCC100; border-color: #FFC100" type="submit" class="btn btn-primary" onsubmit="FormManager.clearFormInputs()">Login</button>
+                        <button type="submit" class="btn btn-primary" onsubmit="FormManager.clearFormInputs()">Login</button>
                     </div>
 
                     <p class="text-center mt-5">
                         Don't have an account?
-                        <a asp-controller="Home" asp-action="Register" style="color: #FCC100;">Register now</a>
+                        <a asp-controller="Home" asp-action="Register" class="text-primary">Register now</a>
                     </p>
 
                 </form>

@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Register Page";
 }
 @model KindHands.DAL.Models.User
 
@@ -34,16 +34,16 @@
                 }
 
                 <div class="mb-3 text-center">
-                    <button type="button" class="btn registration-option" onclick="FormManager.selectOption('volunteer')">
+                    <button type="button" class="btn registration-option selected" onclick="FormManager.selectOption('volunteer')">
                         Volunteer
                     </button>
-                    <button type="button" class="btn registration-option selected" onclick="FormManager.selectOption('organisation')">
+                    <button type="button" class="btn registration-option" onclick="FormManager.selectOption('organisation')">
                         Organisation
                     </button>
                 </div>
 
                 <!-- Volunteer Form -->
-                <form asp-action="RegisterVolunteer" method="post" id="volunteer-form" class="hidden">
+                <form asp-action="RegisterVolunteer" method="post" id="volunteer-form">
 
                     <div class="volunteer-field">
                         <label for="volunteer-username">Username:</label>
@@ -76,14 +76,14 @@
                     </div>
 
                     <div class="text-center pt-1 mt-4">
-                        <button type="submit" class="btn btn-primary" onsubmit="FormManager.clearFormInputs()" style="background: #FCC100; border-color: #FFC100">Register</button>
+                        <button type="submit" class="btn btn-primary" onsubmit="FormManager.clearFormInputs()">Register</button>
                     </div>
-                    <p class="text-center mt-5">Already have an account? <a asp-controller="Home" asp-action="Login" style="color: #FCC100;">Log In</a></p>
+                    <p class="text-center mt-5">Already have an account? <a asp-controller="Home" asp-action="Login" class="text-primary">Log In</a></p>
 
                 </form>
 
                 <!-- Organisation Form -->
-                <form asp-action="RegisterOrganisation" method="post" id="organisation-form">
+                <form asp-action="RegisterOrganisation" method="post" id="organisation-form" class="hidden">
 
                     <div class="organisation-field">
                         <label for="organisation-username">Username:</label>
@@ -116,11 +116,11 @@
                     </div>
 
                     <div class="text-center pt-1 mt-4">
-                        <button type="submit" class="btn btn-primary" onsubmit="FormManager.clearFormInputs()" style="background: #FCC100; border-color: #FFC100">Register</button>
+                        <button type="submit" class="btn btn-primary" onsubmit="FormManager.clearFormInputs()">Register</button>
                     </div>
 
                     <div class="text-center">
-                        <p class="text-center mt-5">Already have an account? <a asp-controller="Home" asp-action="Login" style="color: #FCC100;">Log In</a></p>
+                        <p class="text-center mt-5">Already have an account? <a asp-controller="Home" asp-action="Login" class="text-primary">Log In</a></p>
                     </div>
 
                 </form>
